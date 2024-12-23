@@ -22,7 +22,7 @@ public class Player {
     }
 
 
-    public void selectChar() {
+    public void selectCharacter() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please Choose the Player!\n");
         System.out.println(new Samurai());
@@ -37,7 +37,6 @@ public class Player {
             default -> System.out.println("Invalid input!");
         }
     }
-
     public Integer getID() {
         return ID;
     }
