@@ -23,16 +23,18 @@ public class Game {
         boolean flag = true;
         while (flag) {
             Integer selectLoc = InputUtil.getInteger("""
-                    
-                    Enter the  location number!
+                                        
+                    Enter the location number!
                     -----------
                     1.SafeHouse
                     2.ToolStore
+                    3.Game Over
                     -----------
                     """);
             switch (selectLoc) {
                 case 1 -> location = new SafeHouse(player);
                 case 2 -> location = new ToolStore(player);
+                case 3 -> flag = false;
                 default -> System.out.println("Invalid input!");
             }
             if (location != null && !location.onLocation()) {
