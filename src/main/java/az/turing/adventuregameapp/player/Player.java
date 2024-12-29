@@ -1,6 +1,7 @@
 package az.turing.adventuregameapp.player;
 
-import az.turing.adventuregameapp.location.Weapon;
+import az.turing.adventuregameapp.inventory.Armor;
+import az.turing.adventuregameapp.inventory.Weapon;
 import az.turing.adventuregameapp.util.InputUtil;
 
 import java.util.Scanner;
@@ -12,6 +13,7 @@ public class Player {
     private Integer health;
     private Integer money;
     private Weapon weapon = new Weapon("Fist", 0, 0, 0);
+    private Armor armor = new Armor(0, "Nothing", 0, 0);
 
     public Player() {
     }
@@ -36,6 +38,10 @@ public class Player {
         System.out.println("-------------------------------------------------------------------");
         int playerId = InputUtil.getInteger("Choose the Player,Enter the playerId:");
         System.out.println("------------------------------------------------------------------------------");
+        while (playerId < 1 || playerId > 3) {
+            playerId = InputUtil.getInteger("Invalid input,Enter the playerId between 1 and 3!");
+        }
+        System.out.println("------------------------------------------------------------------------------");
         switch (playerId) {
             case 1 -> {
                 System.out.println("Your Player: " + new Samurai());
@@ -43,7 +49,7 @@ public class Player {
                 this.name = "Samurai";
                 this.damage = 5;
                 this.health = 20;
-                this.money = 15;
+                this.money = 25;
             }
             case 2 -> {
                 System.out.println("Your Player: " + new Knight());
@@ -51,7 +57,7 @@ public class Player {
                 this.name = "Knight";
                 this.damage = 8;
                 this.health = 24;
-                this.money = 5;
+                this.money = 25;
             }
             case 3 -> {
                 System.out.println("Your Player: " + new Archer());
@@ -59,9 +65,8 @@ public class Player {
                 this.name = "Archer";
                 this.damage = 7;
                 this.health = 18;
-                this.money = 20;
+                this.money = 25;
             }
-            default -> System.out.println("Invalid input!");
         }
         System.out.println("------------------------------------------------------------------------------");
     }
@@ -112,6 +117,14 @@ public class Player {
 
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
+    }
+
+    public Armor getArmor() {
+        return armor;
+    }
+
+    public void setArmor(Armor armor) {
+        this.armor = armor;
     }
 
     @Override

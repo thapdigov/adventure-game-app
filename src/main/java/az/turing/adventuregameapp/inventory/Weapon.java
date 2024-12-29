@@ -1,4 +1,4 @@
-package az.turing.adventuregameapp.location;
+package az.turing.adventuregameapp.inventory;
 
 public class Weapon {
     private String name;
@@ -14,9 +14,9 @@ public class Weapon {
     }
     public static Weapon[] weaponList() {
         Weapon[] weaponList = new Weapon[3];
-        weaponList[0] = new Weapon("Gun", 1, 2, 5);
-        weaponList[1] = new Weapon("Sword", 2, 4, 35);
-        weaponList[2] = new Weapon("Gun", 3, 7, 45);
+        weaponList[0] = new Weapon("Gun", 1, 2, 15);
+        weaponList[1] = new Weapon("Sword", 2, 4, 25);
+        weaponList[2] = new Weapon("Gun", 3, 7, 40);
         return weaponList;
     }
 
