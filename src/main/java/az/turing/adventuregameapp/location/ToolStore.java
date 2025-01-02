@@ -21,7 +21,7 @@ public class ToolStore extends NormalLocation {
                     Your choice:
                     1.Weapon
                     2.Armor
-                    3.Exit
+                    3.Back To Location Menu
                     """);
             while (selectStore < 1 || selectStore > 3) {
                 selectStore = InputUtil.getInteger("Invalid input,your choice between 1 and 3");
@@ -45,6 +45,9 @@ public class ToolStore extends NormalLocation {
         }
         System.out.println("-----------------------------------------");
         int weaponId = InputUtil.getInteger("Enter the weaponID:");
+        while (weaponId < 0 || weaponId > Weapon.weaponList().length) {
+            weaponId = InputUtil.getInteger("Invalid Id,Weapon Id between 1 and 3!");
+        }
         Weapon selectedWeapon = Weapon.getWeaponById(weaponId);
         if (selectedWeapon != null && this.getPlayer().getWeapon().getName().equals(selectedWeapon.getName())) {
             System.out.println("You have already purchased this weapon!");
@@ -77,6 +80,9 @@ public class ToolStore extends NormalLocation {
         }
         System.out.println("-----------------------------------------");
         int armorId = InputUtil.getInteger("Enter the armorID:");
+        while (armorId < 0 || armorId > Armor.armorList().size()) {
+            armorId = InputUtil.getInteger("Invalid Id,Armor Id between 1 and 3!");
+        }
         Armor selectedArmor = Armor.getArmorById(armorId);
         if (selectedArmor != null && this.getPlayer().getArmor().getName().equals(selectedArmor.getName())) {
             System.out.println("You have already purchased this armor!");
