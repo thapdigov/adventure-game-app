@@ -5,6 +5,7 @@ public class Wolf {
     private String name;
     private Integer damage;
     private Integer health;
+    private Integer originalHealth;
     private Integer gold;
 
     public Wolf(Integer id, String name, Integer damage, Integer health, Integer gold) {
@@ -12,6 +13,7 @@ public class Wolf {
         this.name = name;
         this.damage = damage;
         this.health = health;
+        this.originalHealth = health;
         this.gold = gold;
     }
 
@@ -44,14 +46,26 @@ public class Wolf {
     }
 
     public void setHealth(Integer health) {
+        if (health < 0) {
+            health = 0;
+        }
         this.health = health;
     }
+
     public Integer getGold() {
         return gold;
     }
 
     public void setGold(Integer gold) {
         this.gold = gold;
+    }
+
+    public Integer getOriginalHealth() {
+        return originalHealth;
+    }
+
+    public void setOriginalHealth(Integer originalHealth) {
+        this.originalHealth = originalHealth;
     }
 
     @Override

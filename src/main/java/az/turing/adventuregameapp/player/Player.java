@@ -4,6 +4,8 @@ import az.turing.adventuregameapp.inventory.Armor;
 import az.turing.adventuregameapp.inventory.Weapon;
 import az.turing.adventuregameapp.util.InputUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Player {
@@ -11,9 +13,11 @@ public class Player {
     private String name;
     private Integer damage;
     private Integer health;
+    private Integer originalHealth;
     private Integer money;
     private Weapon weapon = new Weapon("Fist", 0, 0, 0);
     private Armor armor = new Armor(0, "Nothing", 0, 0);
+    private List<String> award = new ArrayList<>();
 
     public Player() {
     }
@@ -23,8 +27,8 @@ public class Player {
         this.name = name;
         this.damage = damage;
         this.health = health;
+        this.originalHealth = health;
         this.money = money;
-
     }
 
 
@@ -45,27 +49,30 @@ public class Player {
         switch (playerId) {
             case 1 -> {
                 System.out.println("Your Player: " + new Samurai());
-                this.ID = 1;
-                this.name = "Samurai";
-                this.damage = 5;
-                this.health = 20;
-                this.money = 25;
+                this.ID = new Samurai().getID();
+                this.name = new Samurai().getName();
+                this.damage = new Samurai().getDamage();
+                this.health = new Samurai().getHealth();
+                this.originalHealth = new Samurai().getHealth();
+                this.money = new Samurai().getMoney();
             }
             case 2 -> {
                 System.out.println("Your Player: " + new Knight());
-                this.ID = 2;
-                this.name = "Knight";
-                this.damage = 8;
-                this.health = 24;
-                this.money = 25;
+                this.ID = new Knight().getID();
+                this.name = new Knight().getName();
+                this.damage = new Knight().getDamage();
+                this.health = new Knight().getHealth();
+                this.originalHealth = new Knight().getHealth();
+                this.money = new Knight().getMoney();
             }
             case 3 -> {
                 System.out.println("Your Player: " + new Archer());
-                this.ID = 3;
-                this.name = "Archer";
-                this.damage = 7;
-                this.health = 18;
-                this.money = 25;
+                this.ID = new Archer().getID();
+                this.name = new Archer().getName();
+                this.damage = new Archer().getDamage();
+                this.health = new Archer().getHealth();
+                this.originalHealth = new Archer().getHealth();
+                this.money = new Archer().getMoney();
             }
         }
         System.out.println("------------------------------------------------------------------------------");
@@ -100,6 +107,9 @@ public class Player {
     }
 
     public void setHealth(Integer health) {
+        if (health < 0) {
+            health = 0;
+        }
         this.health = health;
     }
 
@@ -125,6 +135,18 @@ public class Player {
 
     public void setArmor(Armor armor) {
         this.armor = armor;
+    }
+
+    public Integer getOriginalHealth() {
+        return originalHealth;
+    }
+
+    public List<String> getAward() {
+        return award;
+    }
+
+    public void setAward(String award) {
+        this.award.add(award);
     }
 
     @Override

@@ -5,6 +5,7 @@ import az.turing.adventuregameapp.util.InputUtil;
 import az.turing.adventuregameapp.wolf.Wolf;
 
 import java.util.Random;
+import java.util.stream.Stream;
 
 public abstract class DangerZone extends Location {
     private String award;
@@ -18,6 +19,13 @@ public abstract class DangerZone extends Location {
 
     @Override
     public boolean onLocation() {
+        for (String s : getPlayer().getAward()) {
+            if (s.equals("Food") || s.equals("Water") || s.equals("Wood")) {
+                System.out.println("You have already fought in this zone!");
+                return true;
+            }
+        }
+
         Random random = new Random();
         int wolfCount = random.nextInt(3) + 1;
         System.out.println("---------------------------------------------------");
@@ -25,6 +33,7 @@ public abstract class DangerZone extends Location {
         System.out.printf("Monster -> name: %s ,damage: %s ,health: %s \n", wolf.getName(), wolf.getDamage(), wolf.getHealth());
         System.out.println("---------------------------------------------------");
         for (int i = 1; i <= wolfCount; i++) {
+            this.getWolf().setHealth(this.getWolf().getOriginalHealth());
             System.out.println("-------------");
             System.out.printf("%d -> monster!\n", i);
             System.out.println("-------------");
@@ -35,29 +44,27 @@ public abstract class DangerZone extends Location {
             switch (choice) {
                 case 1:
                     while (getPlayer().getHealth() > 0 && wolf.getHealth() > 0) {
-                        if (getPlayer().getHealth() < wolf.getHealth()) {
-                            System.out.println("---------------------------------");
-                            System.out.println("Your health is less than monster!");
-                            break;
-                        }
+                        boolean fit = new Random().nextBoolean();
                         System.out.println("--------------------------------------");
-                        wolf.setHealth(wolf.getHealth() - getPlayer().getDamage());
-                        System.out.printf("You hit the monster,monster health: %d \n", wolf.getHealth());
-                        if (wolf.getHealth() > 0) {
+                        if (!fit) {
                             getPlayer().setHealth(getPlayer().getHealth() - wolf.getDamage());
                             System.out.printf("The Monster hit you,your health: %d \n", getPlayer().getHealth());
-
-                            System.out.println("--------------------------------------");
-                            if (getPlayer().getHealth() < 0) {
-                                getPlayer().setHealth(0);
-                            }
+                            wolf.setHealth(wolf.getHealth() - getPlayer().getDamage());
+                            System.out.printf("You hit the monster,monster health: %d \n", wolf.getHealth());
+                        } else {
+                            wolf.setHealth(wolf.getHealth() - getPlayer().getDamage());
+                            System.out.printf("You hit the monster,monster health: %d \n", wolf.getHealth());
+                            getPlayer().setHealth(getPlayer().getHealth() - wolf.getDamage());
+                            System.out.printf("The Monster hit you,your health: %d \n", getPlayer().getHealth());
                         }
+                        System.out.println("--------------------------------------");
                         if (wolf.getHealth() <= 0) {
                             System.out.printf("You killed the monster and won %s gold!\n", wolf.getGold());
                             getPlayer().setMoney(getPlayer().getMoney() + wolf.getGold());
                         }
                         if (getPlayer().getHealth() <= 0) {
-                            System.out.println("You are dead,Game Over!");
+                            System.err.println("YOU ARE DEAD,GAME OVER!");
+                            return false;
                         }
                     }
                     break;
@@ -65,7 +72,12 @@ public abstract class DangerZone extends Location {
                     return true;
             }
         }
-
+        System.out.printf("Congratulations! You cleared all of monster! Your award: %s\n", getAward());
+        getPlayer().setAward(getAward());
+        if (Stream.of("Wood", "Food", "Water").allMatch(getPlayer().getAward()::contains)) {
+            System.err.println("YOU WON THE GAME");
+            return false;
+        }
         return true;
     }
 
