@@ -17,7 +17,7 @@ public class ToolStore extends NormalLocation {
             System.out.println("--------------------------------------------------------------");
             System.out.println("You are in the Tool store, where you can buy weapons or armor!");
             System.out.println("--------------------------------------------------------------");
-            Integer selectStore = InputUtil.getInteger("""
+            int selectStore = InputUtil.getInteger("""
                     Your choice:
                     1.Weapon
                     2.Armor
@@ -96,7 +96,6 @@ public class ToolStore extends NormalLocation {
                 this.getPlayer().setMoney(this.getPlayer().getMoney() - selectedArmor.getPrice());
                 this.getPlayer().setArmor(selectedArmor);
                 System.out.println("You bought armor,your new armor: " + this.getPlayer().getArmor());
-                //  this.getPlayer().setDamage(this.getPlayer().getDamage() + selectedWeapon.getDamage());
                 System.out.println("---------------------------------------------------------------------");
                 System.out.println("Your player : " + this.getPlayer());
                 System.out.println("---------------------------------------------------------------------");

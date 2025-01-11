@@ -20,12 +20,13 @@ public abstract class DangerZone extends Location {
     @Override
     public boolean onLocation() {
         for (String s : getPlayer().getAward()) {
-            if (s.equals("Food") || s.equals("Water") || s.equals("Wood")) {
+            if ((s.equals("Food") && this instanceof Cave)
+                    || (s.equals("Water") && this instanceof River)
+                    || (s.equals("Wood") && this instanceof Forest)) {
                 System.out.println("You have already fought in this zone!");
                 return true;
             }
         }
-
         Random random = new Random();
         int wolfCount = random.nextInt(3) + 1;
         System.out.println("---------------------------------------------------");
@@ -43,19 +44,26 @@ public abstract class DangerZone extends Location {
                     """);
             switch (choice) {
                 case 1:
+                    if (!(getPlayer().getArmor().equals("Nothing"))) {
+                        wolf.setDamage(wolf.getDamage() - getPlayer().getArmor().getBlocke());
+                    }
                     while (getPlayer().getHealth() > 0 && wolf.getHealth() > 0) {
                         boolean fit = new Random().nextBoolean();
                         System.out.println("--------------------------------------");
-                        if (!fit) {
+                        if (fit) {
+                            if (getPlayer().getHealth() > 0) {
+                                wolf.setHealth(wolf.getHealth() - getPlayer().getDamage());
+                                System.out.printf("You hit the monster,monster health: %d \n", wolf.getHealth());
+                            }
                             getPlayer().setHealth(getPlayer().getHealth() - wolf.getDamage());
                             System.out.printf("The Monster hit you,your health: %d \n", getPlayer().getHealth());
-                            wolf.setHealth(wolf.getHealth() - getPlayer().getDamage());
-                            System.out.printf("You hit the monster,monster health: %d \n", wolf.getHealth());
                         } else {
+                            if (getWolf().getHealth() > 0) {
+                                getPlayer().setHealth(getPlayer().getHealth() - wolf.getDamage());
+                                System.out.printf("The Monster hit you,your health: %d \n", getPlayer().getHealth());
+                            }
                             wolf.setHealth(wolf.getHealth() - getPlayer().getDamage());
                             System.out.printf("You hit the monster,monster health: %d \n", wolf.getHealth());
-                            getPlayer().setHealth(getPlayer().getHealth() - wolf.getDamage());
-                            System.out.printf("The Monster hit you,your health: %d \n", getPlayer().getHealth());
                         }
                         System.out.println("--------------------------------------");
                         if (wolf.getHealth() <= 0) {
