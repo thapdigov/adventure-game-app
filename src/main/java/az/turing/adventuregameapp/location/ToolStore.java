@@ -32,7 +32,6 @@ public class ToolStore extends NormalLocation {
                 case 3 -> flag = false;
             }
         }
-
         return true;
     }
 
@@ -55,18 +54,19 @@ public class ToolStore extends NormalLocation {
             System.out.println("Your player : " + this.getPlayer());
             System.out.println("---------------------------------------------------------------------");
         } else {
-            assert selectedWeapon != null;
-            if (selectedWeapon.getPrice() <= this.getPlayer().getMoney()) {
-                System.out.println("Your previous weapon: " + this.getPlayer().getWeapon());
-                this.getPlayer().setMoney(this.getPlayer().getMoney() - selectedWeapon.getPrice());
-                this.getPlayer().setWeapon(selectedWeapon);
-                System.out.println("You bought a weapon,your new weapon: " + this.getPlayer().getWeapon());
-                this.getPlayer().setDamage(this.getPlayer().getDamage() + selectedWeapon.getDamage());
-                System.out.println("---------------------------------------------------------------------");
-                System.out.println("Your player : " + this.getPlayer());
-                System.out.println("---------------------------------------------------------------------");
-            } else {
-                System.out.println("Insufficient funds!");
+            if (selectedWeapon != null) {
+                if (selectedWeapon.getPrice() <= this.getPlayer().getMoney()) {
+                    System.out.println("Your previous weapon: " + this.getPlayer().getWeapon());
+                    this.getPlayer().setMoney(this.getPlayer().getMoney() - selectedWeapon.getPrice());
+                    this.getPlayer().setWeapon(selectedWeapon);
+                    System.out.println("You bought a weapon,your new weapon: " + this.getPlayer().getWeapon());
+                    this.getPlayer().setDamage(this.getPlayer().getDamage() + selectedWeapon.getDamage());
+                    System.out.println("---------------------------------------------------------------------");
+                    System.out.println("Your player : " + this.getPlayer());
+                    System.out.println("---------------------------------------------------------------------");
+                } else {
+                    System.out.println("Insufficient funds!");
+                }
             }
         }
     }
