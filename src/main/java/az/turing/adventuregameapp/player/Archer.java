@@ -2,7 +2,7 @@ package az.turing.adventuregameapp.player;
 
 public class Archer extends Player {
     public Archer() {
-        super(3, "Archer", 4, 15, 25);
+        super(3, "Archer", 7, 21, 23);
     }
 
     @Override

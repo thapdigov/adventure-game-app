@@ -6,7 +6,6 @@ import az.turing.adventuregameapp.util.InputUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Player {
     private Integer ID;
@@ -17,7 +16,7 @@ public class Player {
     private Integer money;
     private Weapon weapon = new Weapon("Fist", 0, 0, 0);
     private Armor armor = new Armor(0, "Nothing", 0, 0);
-    private List<String> award = new ArrayList<>();
+    private final List<String> award = new ArrayList<>();
 
     public Player() {
     }
@@ -33,12 +32,14 @@ public class Player {
 
 
     public void selectCharacter() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("\t\t########PLAYERS########");
         System.out.println("-------------------------------------------------------------------");
-        System.out.println(new Samurai());
-        System.out.println(new Knight());
-        System.out.println(new Archer());
+        Samurai samurai = new Samurai();
+        Knight knight = new Knight();
+        Archer archer = new Archer();
+        System.out.println(samurai);
+        System.out.println(knight);
+        System.out.println(archer);
         System.out.println("-------------------------------------------------------------------");
         int playerId = InputUtil.getInteger("Choose the Player,Enter the playerId:");
         System.out.println("------------------------------------------------------------------------------");
@@ -48,34 +49,29 @@ public class Player {
         System.out.println("------------------------------------------------------------------------------");
         switch (playerId) {
             case 1 -> {
-                System.out.println("Your Player: " + new Samurai());
-                this.ID = new Samurai().getID();
-                this.name = new Samurai().getName();
-                this.damage = new Samurai().getDamage();
-                this.health = new Samurai().getHealth();
-                this.originalHealth = new Samurai().getHealth();
-                this.money = new Samurai().getMoney();
+                printPlayer("Your Player: ", samurai, samurai.getID(), samurai.getName(), samurai.getDamage(),
+                        samurai.getHealth(), samurai.getMoney());
             }
             case 2 -> {
-                System.out.println("Your Player: " + new Knight());
-                this.ID = new Knight().getID();
-                this.name = new Knight().getName();
-                this.damage = new Knight().getDamage();
-                this.health = new Knight().getHealth();
-                this.originalHealth = new Knight().getHealth();
-                this.money = new Knight().getMoney();
+                printPlayer("Your Player: ", knight, knight.getID(), knight.getName(), knight.getDamage(),
+                        knight.getHealth(), knight.getMoney());
             }
             case 3 -> {
-                System.out.println("Your Player: " + new Archer());
-                this.ID = new Archer().getID();
-                this.name = new Archer().getName();
-                this.damage = new Archer().getDamage();
-                this.health = new Archer().getHealth();
-                this.originalHealth = new Archer().getHealth();
-                this.money = new Archer().getMoney();
+                printPlayer("Your Player: ", archer, archer.getID(), archer.getName(), archer.getDamage(),
+                        archer.getHealth(), archer.getMoney());
             }
         }
         System.out.println("------------------------------------------------------------------------------");
+    }
+
+    private void printPlayer(String s, Player player, Integer id, String name, Integer damage, Integer health, Integer money) {
+        System.out.println(player);
+        this.ID = id;
+        this.name = name;
+        this.damage = damage;
+        this.health = health;
+        this.originalHealth = health;
+        this.money = money;
     }
 
     public Integer getID() {

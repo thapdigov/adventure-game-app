@@ -83,7 +83,7 @@ public abstract class DangerZone extends Location {
         System.out.printf("Congratulations! You cleared all of monster! Your award: %s\n", getAward());
         getPlayer().setAward(getAward());
         if (Stream.of("Wood", "Food", "Water").allMatch(getPlayer().getAward()::contains)) {
-            System.err.println("YOU WON THE GAME");
+            System.err.println("YOU HAVE KILLED ALL THE MONSTERS IN THE AREA AND YOU WON THE GAME!!!");
             return false;
         }
         return true;
