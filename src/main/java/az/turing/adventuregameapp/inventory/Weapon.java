@@ -12,23 +12,6 @@ public class Weapon {
         this.damage = damage;
         this.price = price;
     }
-    public static Weapon[] weaponList() {
-        Weapon[] weaponList = new Weapon[3];
-        weaponList[0] = new Weapon("Gun", 1, 2, 15);
-        weaponList[1] = new Weapon("Sword", 2, 4, 25);
-        weaponList[2] = new Weapon("Gun", 3, 7, 40);
-        return weaponList;
-    }
-
-    public static Weapon getWeaponById(int id) {
-        Weapon selectedWeapon = null;
-        for (Weapon weapon : weaponList()) {
-            if (weapon.getID().equals(id)) {
-                selectedWeapon = weapon;
-            }
-        }
-        return selectedWeapon;
-    }
 
     public String getName() {
         return name;

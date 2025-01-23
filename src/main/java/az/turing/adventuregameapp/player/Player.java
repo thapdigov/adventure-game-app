@@ -41,30 +41,31 @@ public class Player {
         System.out.println(knight);
         System.out.println(archer);
         System.out.println("-------------------------------------------------------------------");
-        int playerId = InputUtil.getInteger("Choose the Player,Enter the playerId:");
+        Integer playerId = InputUtil.getInteger("Choose the Player,Enter the playerId:");
         System.out.println("------------------------------------------------------------------------------");
-        while (playerId < 1 || playerId > 3) {
+        while (!(playerId == 1 || playerId == 2 || playerId == 3)) {
             playerId = InputUtil.getInteger("Invalid input,Enter the playerId between 1 and 3!");
         }
         System.out.println("------------------------------------------------------------------------------");
+
         switch (playerId) {
             case 1 -> {
-                printPlayer("Your Player: ", samurai, samurai.getID(), samurai.getName(), samurai.getDamage(),
+                printPlayer(samurai, samurai.getID(), samurai.getName(), samurai.getDamage(),
                         samurai.getHealth(), samurai.getMoney());
             }
             case 2 -> {
-                printPlayer("Your Player: ", knight, knight.getID(), knight.getName(), knight.getDamage(),
+                printPlayer(knight, knight.getID(), knight.getName(), knight.getDamage(),
                         knight.getHealth(), knight.getMoney());
             }
             case 3 -> {
-                printPlayer("Your Player: ", archer, archer.getID(), archer.getName(), archer.getDamage(),
+                printPlayer(archer, archer.getID(), archer.getName(), archer.getDamage(),
                         archer.getHealth(), archer.getMoney());
             }
         }
         System.out.println("------------------------------------------------------------------------------");
     }
 
-    private void printPlayer(String s, Player player, Integer id, String name, Integer damage, Integer health, Integer money) {
+    private void printPlayer(Player player, Integer id, String name, Integer damage, Integer health, Integer money) {
         System.out.println(player);
         this.ID = id;
         this.name = name;
