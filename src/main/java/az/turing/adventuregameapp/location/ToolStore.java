@@ -1,6 +1,7 @@
 package az.turing.adventuregameapp.location;
 
 import az.turing.adventuregameapp.inventory.Armor;
+import az.turing.adventuregameapp.inventory.Inventory;
 import az.turing.adventuregameapp.inventory.Weapon;
 import az.turing.adventuregameapp.player.Player;
 import az.turing.adventuregameapp.util.InputUtil;
@@ -39,15 +40,15 @@ public class ToolStore extends NormalLocation {
         System.out.println("Your balance: " + this.getPlayer().getMoney());
         System.out.println("\t\t########WEAPONS########");
         System.out.println("-----------------------------------------");
-        for (Weapon weapon : Weapon.weaponList()) {
+        for (Weapon weapon : Inventory.weaponList()) {
             System.out.println(weapon);
         }
         System.out.println("-----------------------------------------");
         int weaponId = InputUtil.getInteger("Enter the weaponID:");
-        while (weaponId < 0 || weaponId > Weapon.weaponList().length) {
+        while (weaponId < 0 || weaponId > Inventory.weaponList().length) {
             weaponId = InputUtil.getInteger("Invalid Id,Weapon Id between 1 and 3!");
         }
-        Weapon selectedWeapon = Weapon.getWeaponById(weaponId);
+        Weapon selectedWeapon = Inventory.getWeaponById(weaponId);
         if (selectedWeapon != null && this.getPlayer().getWeapon().getName().equals(selectedWeapon.getName())) {
             System.out.println("You have already purchased this weapon!");
             System.out.println("---------------------------------------------------------------------");
@@ -75,15 +76,15 @@ public class ToolStore extends NormalLocation {
         System.out.println("Your balance: " + this.getPlayer().getMoney());
         System.out.println("\t\t########ARMORS########");
         System.out.println("-----------------------------------------");
-        for (Armor armor : Armor.armorList()) {
+        for (Armor armor : Inventory.armorList()) {
             System.out.println(armor);
         }
         System.out.println("-----------------------------------------");
         int armorId = InputUtil.getInteger("Enter the armorID:");
-        while (armorId < 0 || armorId > Armor.armorList().size()) {
+        while (armorId < 0 || armorId > Inventory.armorList().size()) {
             armorId = InputUtil.getInteger("Invalid Id,Armor Id between 1 and 3!");
         }
-        Armor selectedArmor = Armor.getArmorById(armorId);
+        Armor selectedArmor = Inventory.getArmorById(armorId);
         if (selectedArmor != null && this.getPlayer().getArmor().getName().equals(selectedArmor.getName())) {
             System.out.println("You have already purchased this armor!");
             System.out.println("---------------------------------------------------------------------");
